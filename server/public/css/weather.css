@@ -21,7 +21,7 @@
     text-align: center;
 }
 
-#search-form{
+input{
     margin-top: 2vh;
 }
 
@@ -69,15 +69,22 @@
      width: 100%;
      display: inline-block;
 }
-
-#weatherInfo{
+aside{
+    background-color: #8DBAEE;
+}
+#weatherInfo,#infoCover{
     float: right;
     display: inline-block;
     height: 100vh;
     width: 20vw;
-    background-color: #C2C7CA;
+    background-color: #8DBAEE;
 }
+#infoCover{
+    position: absolute;
+    right: 0;
+    top: 0;
 
+}
 .fa{
     margin: 10vh;
     font-size: 8vw;

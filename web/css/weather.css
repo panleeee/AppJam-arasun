@@ -71,11 +71,11 @@
 }
 
 #weatherInfo{
-    float: right;
     display: inline-block;
     height: 100vh;
     width: 20vw;
-    background-color: #C2C7CA;
+    background-color: #8DBAEE;
+    float: left;
 }
 
 .fa{
