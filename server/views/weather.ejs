@@ -6,6 +6,7 @@
     <title>아라썬</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/weather.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../js/google-map.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMkW0Hm5_R79zGAtqHk5gGz9iJ4jKp5EI&callback=initMap"></script>
 </head>
@@ -16,12 +17,12 @@
             <i class="fa fa-cloud" aria-hidden="true"></i>
             <ul id="weather-info">
                 <h1>
-                    <li>서울시 강남구</li>
+                    <li id="info-city">지역</li>
                 </h1>
-                <li>온도 : </li>
-                <li>습도 : </li>
-                <li>불쾌지수 : </li>
-                <li>미세먼지 농도 :</li>
+                <li id="info-temp">온도 :°C </li>
+                <li id="info-humi">습도 : %</li>
+                <li id="info-angry">불쾌지수 : </li>
+                <li id="info-dust">미세먼지 농도 :  ㎍/㎥ </li>
             </ul>
         </div>
     </section>
@@ -29,37 +30,18 @@
     </section>
     <aside class="side-menu">
         <div id="search" class="border">
-            <form action="/sendGPSInpo" id="search-form">
                 <input type="text" id="search-input" name="city">
                 <button type="submit" id="search-submit">검색</button>
-            </form>
+            
             <ul id="result">
                 <ul class="result-column">
                     <li>
-                        <h4>서울시 노원구</h4>
+                        <h4 id="seach-city">검색 결과</h4>
                     </li>
-                    <li>온도 : 32°</li>
-                    <li>습도 : 80%</li>
-                    <li>미세먼지 : 41㎍/㎥․</li>
-                    <li>불쾌지수 : 30%</li>
-                </ul>
-                <ul class="result-column">
-                    <li>
-                        <h4>수원시 권선구</h4>
-                    </li>
-                    <li>온도 : 32°</li>
-                    <li>습도 : 80%</li>
-                    <li>미세먼지 : 41㎍/㎥․</li>
-                    <li>불쾌지수 : 30%</li>
-                </ul>
-                <ul class="result-column">
-                    <li>
-                        <h4>양구군</h4>
-                    </li>
-                    <li>온도 : 32°</li>
-                    <li>습도 : 80%</li>
-                    <li>미세먼지 : 41㎍/㎥․</li>
-                    <li>불쾌지수 : 30%</li>
+                    <li id="seach-temp"></li>
+                    <li id="search-humi"></li>
+                    <li id="search-angry"></li>
+                    <li id="search-dust"</li>
                 </ul>
             </ul>
         </div>
