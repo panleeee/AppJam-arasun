@@ -1,3 +1,13 @@
+@font-face{
+    font-family: 'sangsang';
+    src: url("../fonts/SangSangTitleOTFB.otf");
+}
+
+body{
+    margin: 0;
+    font-family: 'sangsang';
+}
+
 .views{
     width: 100vw;
     height: 100vh;

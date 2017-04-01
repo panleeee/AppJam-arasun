@@ -3,21 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
+    <!--<link rel="stylesheet" href="../css/weather.css">-->
     <title>아라썬</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/weather.css">
 </head>
 
 <body>
     <section id="weatherInfo">
-        <div class="border">
-            <i class="fa fa-cloud" aria-hidden="true"></i>
-        </div>
+        <div></div>
     </section>
-    <section id="googleMap" style="height: 100vh">
+    <section id="googleMap">
     </section>
     <aside class="side-menu">
-        <div id="search" class="border">
+        <div id="search">
             <form action="" id="search-form">
                 <input type="text" id="search-input">
                 <button type="submit" id="search-submit">검색</button>
@@ -54,7 +51,8 @@
         </div>
     </aside>
     <aside class="side-menu">
-        <div class="border">
+        <div>
+
         </div>
     </aside>
     <script type="text/javascript">
@@ -69,7 +67,7 @@
             }
             map = new google.maps.Map(document.getElementById('googleMap'), {
                 center: { lat: location.lat, lng: location.lon },
-                zoom: 18
+                zoom: 15
             });
         }
     </script>
