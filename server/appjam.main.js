@@ -4,9 +4,14 @@ var http=require('http');
 var https=require('https');
 var urlencode=require('urlencode');
 var app=express();
+var path = require('path');
 var bodyParser = require('body-parser');
 var sendGPSInfo = require('./sendGPSInfo');
 var route = require('./route');
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 
 // var port=1222;
 // var host='39.7.18.141';
