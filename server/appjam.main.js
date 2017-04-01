@@ -5,41 +5,15 @@ var https=require('https');
 var urlencode=require('urlencode');
 var app=express();
 var bodyParser = require('body-parser');
+var sendGPSInfo = require('./sendGPSInfo');
+var route = require('./route');
 
 // var port=1222;
 // var host='39.7.18.141';
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/sendGPSInfo',sendGPSInfo);
+app.use('/',route);
 
-
-
-
-//네이버 주소 검색
-// var sl_adress='개포동';
-// sl_adress=urlencode(sl_adress);
-// var clientKey='B1wPHsGSGA';
-// var ad_options={
-//   url : 'https://openapi.naver.com/v1/map/geocode?encoding=utf-8&coordType=latlng&query=%EB%B6%88%EC%A0%95%EB%A1%9C%206',
-//   host: 'openapi.naver.com',
-//   headers :{
-//   'Accept': '*/*',
-//   'Content-Type': 'application/json',
-//   'X-Naver-Client-Id': 'TTWUuECzU4KaBo1_FIrH',
-//   'X-Naver-Client-Secret': 'B1wPHsGSGA'
-//   }
-// }
-// function sl_callback(error,res,body){
-//   if(!error&& res.statusCode===200){
-//     var sl=JSON.parse(body);
-//
-//     var sl=res.body;
-//     console.log(sl);
-//
-//   } else {
-//     console.log('faild');
-//   }
-// }
-//
-// request(ad_options, sl_callback);
 
 //날씨 api 객체
 var location = {
@@ -106,18 +80,6 @@ function pm_callback(error,res,body){
 }
 request(pm_options, pm_callback);
 
-
-
-//라우터
-app.get('/',function(req,res){
-  console.log('/ open');
-  res.send(wealther);
-});
-app.post('/postGps',function(req,res){
-  var lon = req.body.lon;
-  var lat = req.body.lat;
-  res.send(weatherdata);
-});
 //서버실행
 var server=app.listen(1222,function(){
   var host=server.address().address;
