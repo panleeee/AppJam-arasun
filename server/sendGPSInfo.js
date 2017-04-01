@@ -1,6 +1,6 @@
 var express = require('express');
 var request = require('request');
-var bodyParser  = require('bodyParser');
+var bodyParser  = require('body-parser');
 var router = express.Router();
 
 router.post('/', function (req, res) {
