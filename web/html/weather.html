@@ -6,12 +6,23 @@
     <title>아라썬</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/weather.css">
+    <script src="../js/google-map.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMkW0Hm5_R79zGAtqHk5gGz9iJ4jKp5EI&callback=initMap"></script>
 </head>
 
 <body>
     <section id="weatherInfo">
         <div class="border">
             <i class="fa fa-cloud" aria-hidden="true"></i>
+            <ul id="weather-info">
+                <h1>
+                    <li>서울시 강남구</li>
+                </h1>
+                <li>온도 : </li>
+                <li>습도 : </li>
+                <li>불쾌지수 : </li>
+                <li>미세먼지 농도 :</li>
+            </ul>
         </div>
     </section>
     <section id="googleMap" style="height: 100vh">
@@ -55,27 +66,21 @@
     </aside>
     <aside class="side-menu">
         <div class="border">
+            <ul id="weather-ranking">
+                <h3>미세먼지 농도</h3>
+                <li>1.수원시</li>
+                <li>2.서울특별시</li>
+                <li>3.대전광역시</li>
+                <li>4.양구군</li>
+                <li>5.안양시</li>
+                <li>6.광주광역시</li>
+                <li>7.대구광역시</li>
+                <li>8.안산시</li>
+                <li>9.부산광역시</li>
+                <li>10.여수시</li>
+            </ul>
         </div>
     </aside>
-    <script type="text/javascript">
-        var map;
-        function initMap() {
-            navigator.geolocation.getCurrentPosition(getposition);
-        }
-        function getposition(position) {
-            var location = {
-                lat: position.coords.latitude,
-                lon: position.coords.longitude
-            }
-            map = new google.maps.Map(document.getElementById('googleMap'), {
-                center: { lat: location.lat, lng: location.lon },
-                zoom: 18
-            });
-        }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMkW0Hm5_R79zGAtqHk5gGz9iJ4jKp5EI&callback=initMap">
-
-    </script>
 </body>
 
 </html>
