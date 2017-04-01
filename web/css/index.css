@@ -1,0 +1,42 @@
+.views{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#background{
+    background-image: url("../img/background.jpg");
+    background-size: cover;
+
+}
+
+#cover{
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h1{
+    margin: 0;
+    color: #fff;
+    font-size: 15vh;
+    margin-top: 40vh; 
+}
+
+#start{
+    margin-top: 12vh;
+    width: 10vw;
+    height: 8vh;
+    font-size: 3vh;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+
+#start:hover{
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+}
