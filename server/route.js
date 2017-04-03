@@ -22,7 +22,7 @@ router.post('/searchCity', function (req, res) {
     sl_adress = urlencode(sl_adress);
     var clientKey = 'B1wPHsGSGA';
     var ad_options = {
-        url: 'https://openapi.naver.com/v1/map/geocode?encoding=utf-8&coordType=latlng&query='+sl_adress,
+        url: 'https://openapi.naver.com/v1/map/geocode?encoding=utf-8&coordType=latlng&query=' + sl_adress,
         host: 'openapi.naver.com',
         headers: {
             'Accept': '*/*',
@@ -85,75 +85,86 @@ router.post('/sendGPSInfo', function (req, res) {
         }
     }
 
-    function wh_callback(error, response, body) {
-        if (!error && response.statusCode === 200) {
-            var weatherdata = response.body;
-            weatherdata = JSON.parse(response.body);
-            console.log(weatherdata.weather.hourly[0]);
-            resData.weatherdata = weatherdata;
-        } else {
-            console.log(error + " , " + response.statusCode);
-        }
-    }
-
-    function cu_callback(err, res, body) {
-        if (!err && res.statusCode === 200) {
-            var cudata = JSON.parse(res.body);
-            current = cudata.weather.wIndex.thIndex[0].current.index;
-            console.log('불쾌지수' + current);
-            resData.angry = current;
-        } else {
-            console.log('current : ' + err);
-        }
-    }
 
 
-    function pm_callback(err, res, body) {
-        if (!err && res.statusCode === 200) {
-            var pmdata = JSON.parse(res.body);
-            dust = pmdata.weather.dust[0].pm10.value;
-            console.log('미세먼지' + dust);
-            resData.dust = dust;
-        } else {
-            console.log('dust : ' + err);
-        }
-    }
 
-    request(cu_options, cu_callback);
-    request(wh_options, wh_callback);
-    request(pm_options, pm_callback);
+    Promise.all([
+        new Promise(function (resolve, reject) {
+            function pm_callback(err, res, body) {
+                if (!err && res.statusCode === 200) {
+                    var pmdata = JSON.parse(res.body);
+                    dust = pmdata.weather.dust[0].pm10.value;
+                    console.log('미세먼지' + dust);
+                    resData.dust = dust;
+                    resolve();
+                } else {
+                    console.log('dust : ' + err);
+                }
+            }
+            request(pm_options, pm_callback);
+        }),
+        new Promise(resolve => {
+            request(cu_options, cu_callback);
+            function cu_callback(err, res, body) {
+                if (!err && res.statusCode === 200) {
+                    var cudata = JSON.parse(res.body);
+                    current = cudata.weather.wIndex.thIndex[0].current.index;
+                    console.log('불쾌지수' + current);
+                    resData.angry = current;
+                    resolve();
+                } else {
+                    console.log('current : ' + err);
+                }
+            }
+        }),
+        new Promise(resolve => {
+            request(wh_options, wh_callback);
+            function wh_callback(error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    var weatherdata = response.body;
+                    weatherdata = JSON.parse(response.body);
+                    console.log(weatherdata.weather.hourly[0]);
+                    resData.weatherdata = weatherdata;
+                    resolve();
+                } else {
+                    console.log(error + " , " + response.statusCode);
+                }
+            }
+        })
+    ]).then(_ => {
+        res.send(resData);
+    });
 
-    res.send(resData);
-});
+})
 
-router.post('/searchCity',function(req,res){
-    var sl_adress=req.body.city;
-  sl_adress=urlencode(sl_adress);
-  var clientKey='B1wPHsGSGA';
-  var ad_options={
-    url : 'https://openapi.naver.com/v1/map/geocode?encoding=utf-8&coordType=latlng&query='+sl_adress,
-    host: 'openapi.naver.com',
-    headers :{
-    'Accept': '*/*',
-    'Content-Type': 'application/json',
-    'X-Naver-Client-Id': 'TTWUuECzU4KaBo1_FIrH',
-    'X-Naver-Client-Secret': 'B1wPHsGSGA'
-    }
-  }
-  function sl_callback(err,response,body){
-    if(!error&& response.statusCode===200){
-      var sl=JSON.parse(body);
+// router.post('/searchCity',function(req,res){
+//     var sl_adress=req.body.city;
+//   sl_adress=urlencode(sl_adress);
+//   var clientKey='B1wPHsGSGA';
+//   var ad_options={
+//     url : 'https://openapi.naver.com/v1/map/geocode?encoding=utf-8&coordType=latlng&query='+sl_adress,
+//     host: 'openapi.naver.com',
+//     headers :{
+//     'Accept': '*/*',
+//     'Content-Type': 'application/json',
+//     'X-Naver-Client-Id': 'TTWUuECzU4KaBo1_FIrH',
+//     'X-Naver-Client-Secret': 'B1wPHsGSGA'
+//     }
+//   }
+//   function sl_callback(err,response,body){
+//     if(!error&& response.statusCode===200){
+//       var sl=JSON.parse(body);
 
-      var sl=response.body;
-      console.log(sl);
-      res.send(sl);
+//       var sl=response.body;
+//       console.log(sl);
+//       res.send(sl);
 
-    } else {
-      console.log('naver_address_select : '+err);
-    }
-  }
+//     } else {
+//       console.log('naver_address_select : '+err);
+//     }
+//   }
 
-  request(ad_options, sl_callback);
-});
+//   request(ad_options, sl_callback);
+// });
 
 module.exports = router;
